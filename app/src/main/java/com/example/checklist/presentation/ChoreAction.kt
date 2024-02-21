@@ -1,9 +1,10 @@
-package com.example.checklist
+package com.example.checklist.presentation
 
+import com.example.checklist.data.Chore
 import java.io.Serializable
 
-    data class ItemAction (
-        val item : Item?,
+    data class ChoreAction (
+        val chore : Chore?,
         val actionType: String
 ) : Serializable
 

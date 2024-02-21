@@ -1,22 +1,20 @@
-package com.example.checklist
+package com.example.checklist.presentation
 
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
+import com.example.checklist.R
+import com.example.checklist.data.Chore
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class CheckListActivity : AppCompatActivity() {
 
     private val adapter: CheckListAdapter by lazy {
-        CheckListAdapter(::onListItemClicked)
+        CheckListAdapter(::onListChoreClicked)
     }
 
     private val viewModel : CheckListViewModel by lazy {
@@ -28,9 +26,9 @@ class CheckListActivity : AppCompatActivity() {
     ) { result : ActivityResult ->
         if (result.resultCode == Activity.RESULT_OK) {
             val data = result.data
-            val itemAction = data?.getSerializableExtra(ITEM_ACTION_RESULT) as ItemAction
+            val choreAction = data?.getSerializableExtra(ITEM_ACTION_RESULT) as ChoreAction
 
-            viewModel.execute(itemAction)
+            viewModel.execute(choreAction)
         }
     }
 
@@ -54,18 +52,18 @@ class CheckListActivity : AppCompatActivity() {
     }
 
     private fun listFromDatabase () {
-        val listObserver = Observer<List<Item>> { listItems ->
-            adapter.submitList(listItems)
+        val listObserver = Observer<List<Chore>> { listChores ->
+            adapter.submitList(listChores)
         }
-        viewModel.checkListLiveData.observe(this@MainActivity, listObserver)
+        viewModel.choreListLiveData.observe(this@CheckListActivity, listObserver)
     }
 
-    private fun onListItemClicked (item:Item) {
-        openCheckListDetails(item)
+    private fun onListChoreClicked (chore: Chore) {
+        openCheckListDetails(chore)
     }
 
-    private fun openCheckListDetails (item: Item? = null) {
-        val intent = ItemDetailsActivity.start (this, item)
+    private fun openCheckListDetails (chore: Chore? = null) {
+        val intent = ChoreDetailsActivity.start(this, chore)
         startForResult.launch(intent)
     }
 }

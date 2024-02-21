@@ -1,4 +1,4 @@
-package com.example.checklist
+package com.example.checklist.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -8,16 +8,16 @@ import androidx.room.Query
 import androidx.room.Update
 
 @Dao
-interface ItemDao {
+interface ChoreDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert (item:Item)
+    fun insert (chore: Chore)
 
-    @Query("SELECT * FROM item")
-    fun getAll(): LiveData<List<Item>>
+    @Query("SELECT * FROM chore")
+    fun getAll(): LiveData<List<Chore>>
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun update (item:Item)
+    fun update (chore: Chore)
 
-    @Query ("DELETE FROM item WHERE id=:id")
+    @Query ("DELETE FROM chore WHERE id=:id")
     fun deleteById (id:Int)
 }

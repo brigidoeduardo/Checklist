@@ -8,7 +8,7 @@
     android:layout_marginStart="8dp">
 
     <TextView
-        android:id="@+id/tvItemName"
+        android:id="@+id/tvChoreName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,12 +20,12 @@
         android:layout_marginTop="4dp"/>
 
     <TextView
-        android:id="@+id/tvItemDesc"
+        android:id="@+id/tvChoreDesc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvItemName"
+        app:layout_constraintTop_toBottomOf="@+id/tvChoreName"
         tools:text="Checklist item description"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"/>
